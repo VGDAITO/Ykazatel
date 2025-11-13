@@ -13,7 +13,21 @@ void capital(std::string &offer)
 	{
 		if (offer[i - 1] == ' ')
 			offer[i] = toupper((unsigned char)offer[i]);
+
 	}
+	std::cout << '\n';
+}
+void Empty(std::string& offer)
+{
+	if (offer.empty())
+	{
+		std::cout << "Строка пустая!";
+	}
+	else
+	{
+		std::cout << "Строка не пустая";
+	}
+	std::cout << '\n';
 }
 
 int main()
@@ -26,6 +40,7 @@ int main()
 	std::getline(std::cin, offer, '\n');
 
 	capital(offer);
+	Empty(offer);
 	std::cout << offer;
 	return 0;
 }
