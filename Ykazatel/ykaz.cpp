@@ -4,7 +4,7 @@
 #include <limits>
 #include <cctype>
 
-void capital(std::string &offer)
+void Format(std::string& offer)
 {
 	if (!offer.empty())
 		offer[0] = toupper((unsigned char)offer[0]);
@@ -13,21 +13,31 @@ void capital(std::string &offer)
 	{
 		if (offer[i - 1] == ' ')
 			offer[i] = toupper((unsigned char)offer[i]);
-
+		else
+		{
+			offer[i] = tolower((unsigned char)offer[i]);
+		}
 	}
 	std::cout << '\n';
 }
-void Empty(std::string& offer)
+std::string LowerStr(const std::string& s)
 {
-	if (offer.empty())
+	std::string result = s;
+	for (size_t i = 0; i < result.size(); i++)
 	{
-		std::cout << "Строка пустая!";
+		result[i] = std::tolower((unsigned char)result[i]);
 	}
-	else
-	{
-		std::cout << "Строка не пустая";
-	}
-	std::cout << '\n';
+	return result;
+}
+
+bool TrueFalse(const std::string& text, const std::string& word)
+{
+	
+
+	std::string lowText = LowerStr(text);
+	std::string lowWord = LowerStr(word);
+	return lowText.find(lowWord) != std::string::npos;
+
 }
 
 int main()
@@ -39,8 +49,33 @@ int main()
 	std::cout << "Введите предложение: ";
 	std::getline(std::cin, offer, '\n');
 
-	capital(offer);
-	Empty(offer);
-	std::cout << offer;
+	
+
+	if (offer.empty())
+	{
+		std::cout << "Строка пустая!";
+		std::cout << '\n';
+	}
+	
+	Format(offer);
+	
+	if (!offer.empty() && offer.back() != '.')
+	{
+		offer.push_back('.');
+
+	}
+
+	std::cout << "\nПреобразованная строка: " << offer << "\n\n";
+	
+	std::string word;
+	std::cout << "Введите слово для поиска: ";
+	std::getline(std::cin, word);
+
+	if (TrueFalse(offer, word))
+		std::cout << "Нашёл\n";
+	else
+		std::cout << "Не нашёл\n";
+
+
 	return 0;
 }
